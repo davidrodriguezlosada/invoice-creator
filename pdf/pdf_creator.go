@@ -55,28 +55,6 @@ func CreateInvoice(invoice model.Invoice, shipFromCompany model.Company, billToC
 	}
 }
 
-func addLogo(pdf *gopdf.GoPdf) {
-	err := pdf.Image("./resources/logo.png", 70.0, 45.0, &gopdf.Rect{W: 200.0, H: 40.0})
-	if err != nil {
-		log.Print(err.Error())
-	}
-}
-
-func addInvoiceData(pdf *gopdf.GoPdf, invoice model.Invoice, invoiceDataX float64, invoiceDataY float64) {
-	pdf.SetXY(invoiceDataX, invoiceDataY)
-	addLine(pdf, invoiceDataX, InvoiceText+": "+invoice.Number)
-	addLine(pdf, invoiceDataX, InvoiceDateText+": "+invoice.Date)
-}
-
-func addCompanyData(pdf *gopdf.GoPdf, x float64, y float64, title string, company model.Company) {
-	pdf.SetY(y)
-	addBoldLine(pdf, x, title)
-	addBoldLine(pdf, x, company.Name)
-	addLine(pdf, x, CompanyTINText+": "+company.TIN)
-	addLine(pdf, x, company.AddressLine1)
-	addLine(pdf, x, company.AddressLine2)
-}
-
 func loadFonts(pdf *gopdf.GoPdf) {
 	err := pdf.AddTTFFont("Arial", "resources/Arial.ttf")
 	if err != nil {
@@ -102,6 +80,28 @@ func setBoldStyle(pdf *gopdf.GoPdf) {
 	if err != nil {
 		log.Print(err.Error())
 	}
+}
+
+func addLogo(pdf *gopdf.GoPdf) {
+	err := pdf.Image("./resources/logo.png", 70.0, 45.0, &gopdf.Rect{W: 200.0, H: 40.0})
+	if err != nil {
+		log.Print(err.Error())
+	}
+}
+
+func addInvoiceData(pdf *gopdf.GoPdf, invoice model.Invoice, invoiceDataX float64, invoiceDataY float64) {
+	pdf.SetXY(invoiceDataX, invoiceDataY)
+	addLine(pdf, invoiceDataX, InvoiceText+": "+invoice.Number)
+	addLine(pdf, invoiceDataX, InvoiceDateText+": "+invoice.Date)
+}
+
+func addCompanyData(pdf *gopdf.GoPdf, x float64, y float64, title string, company model.Company) {
+	pdf.SetY(y)
+	addBoldLine(pdf, x, title)
+	addBoldLine(pdf, x, company.Name)
+	addLine(pdf, x, CompanyTINText+": "+company.TIN)
+	addLine(pdf, x, company.AddressLine1)
+	addLine(pdf, x, company.AddressLine2)
 }
 
 func addLine(pdf *gopdf.GoPdf, initialX float64, text string) {
