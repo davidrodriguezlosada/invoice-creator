@@ -7,14 +7,13 @@ import (
 )
 
 const (
-	file           = "resources/invoice_data.xlsx"
 	dataSheet      = "Data"
 	companiesSheet = "Companies"
 	invoicesSheet  = "Invoices"
 )
 
-func ParseExcel() (error, model.Company, []model.Company, []model.Invoice) {
-	xlsx, err := excelize.OpenFile(file)
+func ParseExcel(excelFilePath string) (error, model.Company, []model.Company, []model.Invoice) {
+	xlsx, err := excelize.OpenFile(excelFilePath)
 	if err != nil {
 		return err, model.Company{}, nil, nil
 	}

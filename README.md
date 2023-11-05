@@ -31,7 +31,7 @@ Build the program:
 
 Run the program:
 
-    go run .
+    go run . ./resources/invoice_data.xlsx
 
 ## Contributing
 Feel free to contribute to this project by submitting issues, feature requests, or pull requests. Your contributions are highly appreciated.

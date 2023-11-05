@@ -8,10 +8,17 @@ import (
 	"invoice-creator/model"
 	"invoice-creator/pdf"
 	"log"
+	"os"
 )
 
 func main() {
-	err, shipFromCompany, billToCompanies, invoices := excel.ParseExcel()
+	args := os.Args
+	if len(args) != 2 {
+		fmt.Println("Usage: go run main.go excel_file_path")
+		return
+	}
+
+	err, shipFromCompany, billToCompanies, invoices := excel.ParseExcel(args[1])
 	if err != nil {
 		log.Printf("Error: %v", err)
 		return
