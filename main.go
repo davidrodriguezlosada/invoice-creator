@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"github.com/thoas/go-funk"
 	"invoice-creator/excel"
 	"invoice-creator/model"
 	"invoice-creator/pdf"
@@ -16,7 +17,11 @@ func main() {
 		return
 	}
 
-	for _, invoice := range invoices {
+	invoicesToCreate := funk.Filter(invoices, func(invoice model.Invoice) bool {
+		return !invoice.Created
+	}).([]model.Invoice)
+
+	for _, invoice := range invoicesToCreate {
 		err, billToCompany := getInvoiceCompany(invoice, billToCompanies)
 		if err != nil {
 			log.Printf("Error: %v", err)

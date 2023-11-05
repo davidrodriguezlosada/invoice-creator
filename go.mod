@@ -5,6 +5,7 @@ go 1.21
 require (
 	github.com/signintech/gopdf v0.19.0
 	github.com/xuri/excelize/v2 v2.8.0
+	github.com/thoas/go-funk v0.9.3
 )
 
 require (
